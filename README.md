@@ -1,0 +1,2 @@
+# Mazing
+Maze game project
