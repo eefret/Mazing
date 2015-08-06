@@ -8,7 +8,7 @@ using System.Text;
 public class GridCreatorGUI : Editor
 {
     // Grid creator reference
-    private GridCreator gridCreator;
+    public GridCreator gridCreator;
     // Last tool to restoring it when done editing
     private Tool lastTool;
     // Editing flag
@@ -33,8 +33,9 @@ public class GridCreatorGUI : Editor
         // Draw the base gui
 		base.OnInspectorGUI ();
 
-        // Get the component from the selected object
-        gridCreator = Selection.activeGameObject.GetComponent<GridCreator>();
+        if(gridCreator == null) {
+            gridCreator = Selection.activeGameObject.GetComponent<GridCreator>();
+        }
 
         // Init level button
         Rect button = EditorGUILayout.BeginHorizontal ("Button");
@@ -89,6 +90,8 @@ public class GridCreatorGUI : Editor
         if (GUI.Button (button, GUIContent.none)) {
             gridCreator = Selection.activeGameObject.GetComponent<GridCreator>();
             gridCreator.selectedTool = -1;
+            gridCreator.selectedTile.Set(-1, -1);
+            gridCreator.lastSelectedTile.Set(-1, -1);
 
             Tools.current = lastTool;
             editing = false;

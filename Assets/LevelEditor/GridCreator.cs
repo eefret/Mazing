@@ -4,6 +4,7 @@ using System.Collections;
 public class GridCreator : MonoBehaviour {
 
     // Grid map
+    [HideInInspector]
     public int[] map;
 
     // Map size and block size
@@ -11,7 +12,9 @@ public class GridCreator : MonoBehaviour {
     public int levelIndex = 0;
     public int mapWidth = 10;
     public int mapHeight = 10;
+    [HideInInspector]
     public float blockWidth = 1;
+    [HideInInspector]
     public float blockHeight = 1;
 
     // Floor material
@@ -61,6 +64,7 @@ public class GridCreator : MonoBehaviour {
         container.name = "Grid Container";
         container.transform.parent = transform;
         container.transform.localPosition = new Vector3(0, 0, 0);
+        container.transform.hideFlags = HideFlags.HideInHierarchy;
         //container.isStatic = true;
 
         int i, j;
@@ -129,6 +133,7 @@ public class GridCreator : MonoBehaviour {
     void OnDrawGizmosSelected() {
         Gizmos.matrix = transform.localToWorldMatrix;
 
+        // Draw the tiles white if empty and black if wall
         int i, j;
         float offsetx = blockWidth / 2;
         float offsety = blockHeight / 2;
@@ -143,9 +148,11 @@ public class GridCreator : MonoBehaviour {
         }
 
         // Draw selected tile
-        Gizmos.color = new Color(0, 0.8f, 0, 0.8f);
-        Gizmos.DrawCube(new Vector3(selectedTile.x * blockWidth + offsetx, selectedTile.y * blockHeight + offsety, 0), 
-                        new Vector3(blockWidth, blockHeight, 1));
+        if(selectedTile.x > 0) {
+            Gizmos.color = new Color(0, 0.8f, 0, 0.8f);
+            Gizmos.DrawCube(new Vector3(selectedTile.x * blockWidth + offsetx, selectedTile.y * blockHeight + offsety, 0), 
+                            new Vector3(blockWidth, blockHeight, 1));
+        }
 
         switch (selectedTool)
         {
