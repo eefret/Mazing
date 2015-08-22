@@ -3,6 +3,9 @@ using System.Collections;
 
 public class GridCreator : MonoBehaviour {
 
+    // Public static current level reference
+    public static GridCreator currentLevel;
+
     // Grid map
     [HideInInspector]
     public int[] map;
@@ -217,4 +220,15 @@ public class GridCreator : MonoBehaviour {
         }
     }
 
+    public static bool checkPosition (Vector3 Position) {
+        Vector3 gridPos = currentLevel.transform.position;
+        Vector2 levelTile = new Vector2(Mathf.FloorToInt((Position.x - gridPos.x) / currentLevel.blockWidth),
+                                        Mathf.FloorToInt((Position.y - gridPos.y) / currentLevel.blockHeight));
+        
+        if(currentLevel.map[(int)levelTile.x * currentLevel.mapWidth + (int)levelTile.y] == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

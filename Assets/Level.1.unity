@@ -87,7 +87,7 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!4 &15685964
+--- !u!4 &15685964 stripped
 Transform:
   m_PrefabParentObject: {fileID: 482440, guid: 6592406899639394f968d8f32c3a5a45, type: 2}
   m_PrefabInternal: {fileID: 275507014}
@@ -653,11 +653,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1709768841}
   m_RootOrder: 1
---- !u!1 &1096733084
+--- !u!1 &1096733084 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 179350, guid: a3097d3040ced1b40859e94c25950a88, type: 2}
   m_PrefabInternal: {fileID: 138969124}
---- !u!4 &1096733085
+--- !u!4 &1096733085 stripped
 Transform:
   m_PrefabParentObject: {fileID: 486850, guid: a3097d3040ced1b40859e94c25950a88, type: 2}
   m_PrefabInternal: {fileID: 138969124}

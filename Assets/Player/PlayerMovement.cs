@@ -12,8 +12,6 @@ public class PlayerMovement : MonoBehaviour {
     public float movement = 1;
     public float rotation = 1;
 
-    public GridCreator level;
-
     private float angle = 3.14f;
 
 	// Use this for initialization
@@ -63,32 +61,17 @@ public class PlayerMovement : MonoBehaviour {
                 break;
         }
 
-        if(checkPosition(lastPosition)) {
-            model.transform.LookAt(lastPosition);
-
+        if(GridCreator.checkPosition(lastPosition)) {
             if(lastPosition != transform.position) {
-                Vector3 angle = model.transform.rotation.eulerAngles;
-                if(lastPosition.x < transform.position.x) { model.transform.eulerAngles = new Vector3(angle.x, angle.y, 270); }
-                else if(lastPosition.x == transform.position.x) {
-                    if(lastPosition.y < transform.position.y) { model.transform.eulerAngles = new Vector3(angle.x, angle.y, 360); }
-                    else { model.transform.eulerAngles = new Vector3(angle.x, angle.y, 180); }                    
+                model.transform.LookAt(lastPosition, Vector3.up);
+                if(lastPosition.x == transform.position.x) {
+                    model.transform.Rotate(new Vector3(90, 90, 0));
+                } else {
+                    model.transform.Rotate(new Vector3(0, 90, 0));
                 }
-                else { model.transform.eulerAngles = new Vector3(angle.x, angle.y, 90); }
             }
 
             transform.position = lastPosition;
         }
 	}
-
-    bool checkPosition (Vector3 Position) {
-        Vector3 gridPos = level.transform.position;
-        Vector2 levelTile = new Vector2(Mathf.FloorToInt((Position.x - gridPos.x) / level.blockWidth),
-                                        Mathf.FloorToInt((Position.y - gridPos.y) / level.blockHeight));
-
-        if(level.map[(int)levelTile.x * level.mapWidth + (int)levelTile.y] == 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
 }
